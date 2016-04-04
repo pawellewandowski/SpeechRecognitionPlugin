@@ -110,7 +110,21 @@ public class SpeechRecognition extends CordovaPlugin {
 
             @Override
             public void run() {
-                recognizer.stopListening();
+                if(recognizer){
+                    recognizer.stopListening();
+                }
+                else{
+                        JSONObject event = new JSONObject();
+                        JSONArray results = new JSONArray();
+                        try {
+                            event.put("results", results);
+                        } catch (JSONException e) {
+                            // this will never happen
+                        }
+                        PluginResult pr = new PluginResult(PluginResult.Status.OK, event);
+                        pr.setKeepCallback(true);
+                        this.speechRecognizerCallbackContext.sendPluginResult(pr);
+                }
             }
             
         });
