@@ -80,7 +80,7 @@ public class SpeechRecognition extends CordovaPlugin {
 
                 @Override
                 public void run() {
-                       if(recognizer){
+                       if(recognizer != null){
                             recognizer.startListening(intent);
                        }
                      else{
